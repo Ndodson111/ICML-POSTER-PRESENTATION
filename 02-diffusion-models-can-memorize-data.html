@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ICML Presentation · Slide 2 · Diffusion models can memorize data</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
+  <link rel="stylesheet" href="shared/deck.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script defer src="shared/deck.js"></script>
+  <style>
+    .setup-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.45em;
+      margin: 0.08em 0 0.18em;
+    }
+
+    .setup-pill {
+      border-radius: 999px;
+      padding: 0.24em 0.64em 0.2em;
+      background: #edf3f8;
+      border: 1px solid rgba(47, 93, 156, 0.12);
+      font-size: 0.44em;
+      line-height: 1.2;
+      color: #36516f;
+    }
+
+    .hero-figure {
+      margin: 0.2em auto 0;
+      width: 70%;
+      max-width: 57.4rem;
+      height: 29.4rem;
+      max-height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .reveal section .hero-figure img {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+      margin: 0 auto;
+      object-fit: contain;
+      border-radius: 14px;
+      box-shadow: 0 18px 42px rgba(35, 47, 62, 0.08);
+    }
+
+    .qa-block {
+      display: grid;
+      gap: 0.14em;
+      width: max-content;
+      max-width: 100%;
+      margin: 0.9em auto 0;
+    }
+
+    .qa-row {
+      display: grid;
+      grid-template-columns: 8.2ch max-content;
+      column-gap: 0.14em;
+      align-items: baseline;
+      width: max-content;
+      max-width: 100%;
+      text-align: left;
+    }
+
+    .question-callout {
+      margin: 0;
+      width: max-content;
+      max-width: 100%;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 0.9em;
+      line-height: 1.24;
+      color: #31465e;
+      white-space: nowrap;
+    }
+
+    .answer-callout {
+      margin: 0;
+      width: max-content;
+      max-width: 100%;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 0.9em;
+      line-height: 1.24;
+      color: #31465e;
+      white-space: nowrap;
+    }
+
+    .qa-label {
+      text-align: right;
+    }
+
+    .question-callout strong {
+      color: #1f3246;
+      font-weight: 600;
+    }
+
+    .answer-callout strong {
+      color: #1f3246;
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .hero-figure {
+        width: 96vw;
+        max-width: none;
+        height: auto;
+      }
+
+      .hero-figure img {
+        width: 100%;
+        height: auto;
+      }
+
+      .question-callout {
+        font-size: 0.64em;
+        width: auto;
+        white-space: normal;
+      }
+
+      .answer-callout {
+        font-size: 0.64em;
+        width: auto;
+        white-space: normal;
+      }
+
+      .qa-block,
+      .qa-row {
+        width: auto;
+      }
+
+      .qa-row {
+        grid-template-columns: auto;
+        text-align: center;
+      }
+
+      .qa-label {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body class="modular-slide has-custom-nav" data-prev="01-two-calm-ends-and-the-wild-middle.html" data-home="index.html">
+  <header class="modular-nav">
+    <div class="modular-nav__group">
+      <a href="01-two-calm-ends-and-the-wild-middle.html">Prev</a>
+      <a href="index.html">Deck</a>
+      <div class="modular-nav__meta">Slide 2 / 2</div>
+      <a class="is-disabled" href="index.html" aria-disabled="true">Next</a>
+    </div>
+  </header>
+
+  <div class="reveal standalone-reveal">
+    <div class="slides">
+      <section>
+        <h2 data-kicker="EDM (Karras et al., 2022) retrained on 1K CIFAR-10">Diffusion models can memorize data</h2>
+
+        <div class="setup-row">
+          <div class="setup-pill">Model: standard EDM sampler / denoiser from Karras et al., NeurIPS 2022</div>
+          <div class="setup-pill">Training set: 1,000 CIFAR-10 images</div>
+        </div>
+
+        <figure class="hero-figure">
+          <img
+            src="assets/slide-02-memorization-panel.png"
+            alt="Three deterministic random seeds for EDM-1K showing reverse ODE states, one-step denoiser outputs, and final nearest-neighbor training images"
+          >
+        </figure>
+
+        <div class="qa-block">
+          <p class="question-callout qa-row fragment" data-fragment-index="1">
+            <span class="qa-label"><strong>Question:</strong></span>
+            <span>Is memorization risk uniform across the noise schedule?</span>
+          </p>
+          <p class="answer-callout qa-row fragment" data-fragment-index="2">
+            <span class="qa-label"><strong>Answer:</strong></span>
+            <span>No</span>
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

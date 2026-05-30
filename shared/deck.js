@@ -1,4 +1,6 @@
 (function () {
+  let revealDeck = null;
+
   function isSnapshotMode() {
     return new URLSearchParams(window.location.search).get("snapshot") === "1";
   }
@@ -29,6 +31,7 @@
     });
 
     await deck.initialize();
+    revealDeck = deck;
   }
 
   function installKeyboardNav() {
@@ -52,12 +55,26 @@
       if (isEditable) return;
 
       if ((event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") && next) {
+        const fragments = revealDeck?.availableFragments?.();
+        if (fragments?.next) {
+          event.preventDefault();
+          revealDeck.next();
+          return;
+        }
+
         event.preventDefault();
         navigate(next);
         return;
       }
 
       if ((event.key === "ArrowLeft" || event.key === "PageUp" || event.key === "Backspace") && prev) {
+        const fragments = revealDeck?.availableFragments?.();
+        if (fragments?.prev) {
+          event.preventDefault();
+          revealDeck.prev();
+          return;
+        }
+
         event.preventDefault();
         navigate(prev);
         return;
@@ -72,7 +89,7 @@
 
   window.addEventListener("DOMContentLoaded", async () => {
     enableSnapshotMode();
-    installKeyboardNav();
     await initReveal();
+    installKeyboardNav();
   });
 })();

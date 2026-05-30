@@ -4,6 +4,7 @@
   --ink: #15202b;
   --ink-soft: #4b5a6c;
   --ink-muted: #74849a;
+  --navy: #1f3246;
   --gold: #c28c2d;
   --line: rgba(21, 32, 43, 0.11);
   --line-strong: rgba(21, 32, 43, 0.18);
@@ -22,6 +23,11 @@ body {
   font-family: "Public Sans", "Avenir Next", "Segoe UI", sans-serif;
 }
 
+body.modular-slide {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
 .reveal-viewport {
   background: var(--paper) !important;
 }
@@ -37,6 +43,70 @@ body {
 .reveal .slides section {
   box-sizing: border-box;
   text-align: left;
+  padding: clamp(0.88em, 1.04vw, 1.02em) clamp(1.02em, 1.28vw, 1.24em) clamp(0.76em, 0.96vw, 0.9em);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.reveal .slides section > h2 {
+  flex-shrink: 0;
+}
+
+.reveal .slides section:not(.title-slide) > h2::before {
+  content: attr(data-kicker);
+  display: block;
+  margin-bottom: 0.6em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.36em;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.reveal .slides section:not(.title-slide) > h2:not([data-kicker])::before {
+  content: none;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  font-family: "Newsreader", Georgia, serif;
+  color: var(--navy);
+  text-transform: none;
+  letter-spacing: -0.03em;
+}
+
+.reveal h2 {
+  position: relative;
+  margin: 0 0 0.58em;
+  padding-bottom: 0.24em;
+  font-size: 1.52em;
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+}
+
+.reveal h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2.2em;
+  height: 2px;
+  background: var(--navy);
+  opacity: 0.75;
+}
+
+.reveal p,
+.reveal li {
+  color: var(--ink-soft);
+  line-height: 1.42;
 }
 
 .reveal .slide-number {
@@ -50,6 +120,10 @@ body {
 .reveal .controls,
 .reveal .progress {
   color: var(--gold);
+}
+
+body.has-custom-nav .reveal .slide-number {
+  display: none !important;
 }
 
 .deck-link {
@@ -217,6 +291,104 @@ body {
   white-space: nowrap;
 }
 
+.modular-nav {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 30;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.modular-nav__group {
+  position: relative;
+  width: 100%;
+  height: 2.4rem;
+}
+
+.modular-nav__group > * {
+  pointer-events: auto;
+}
+
+.modular-nav__meta {
+  position: absolute;
+  bottom: 0.64rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.28em 0.9em 0;
+  border-top: 1px solid rgba(67, 82, 101, 0.18);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(67, 82, 101, 0.48);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.modular-nav a {
+  position: absolute;
+  bottom: 0.64rem;
+  padding: 0.28em 1.1em;
+  font-size: 0;
+  line-height: 1;
+  color: transparent;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.modular-nav a[href$="index.html"] {
+  display: none !important;
+}
+
+.modular-nav a::before {
+  display: inline-block;
+  padding: 0.28em 0 0;
+  border-top: 1px solid rgba(67, 82, 101, 0.18);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(31, 50, 70, 0.46);
+}
+
+.modular-nav__group > a:first-child {
+  left: 1.1rem;
+}
+
+.modular-nav__group > a:first-child::before {
+  content: "‹  prev";
+}
+
+.modular-nav__group > a:last-child {
+  right: 1.1rem;
+}
+
+.modular-nav__group > a:last-child::before {
+  content: "next  ›";
+}
+
+body:hover .modular-nav a,
+.modular-nav a:focus-visible {
+  opacity: 1;
+}
+
+.modular-nav a:hover::before,
+.modular-nav a:focus-visible::before {
+  color: var(--navy);
+  border-top-color: var(--navy);
+}
+
+.modular-nav a.is-disabled {
+  pointer-events: none;
+  visibility: hidden;
+}
+
 .snapshot .reveal .slide-number,
 .snapshot .reveal .controls,
 .snapshot .reveal .progress {
@@ -255,5 +427,9 @@ body {
   .paper-affiliations p {
     font-size: 0.58em;
     white-space: normal;
+  }
+
+  .modular-nav {
+    display: none;
   }
 }
