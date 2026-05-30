@@ -122,6 +122,10 @@ body.modular-slide {
   color: var(--gold);
 }
 
+.katex {
+  font-size: 0.96em;
+}
+
 body.has-custom-nav .reveal .slide-number {
   display: none !important;
 }
