@@ -1,0 +1,259 @@
+:root {
+  --paper: #ffffff;
+  --surface: #ffffff;
+  --ink: #15202b;
+  --ink-soft: #4b5a6c;
+  --ink-muted: #74849a;
+  --gold: #c28c2d;
+  --line: rgba(21, 32, 43, 0.11);
+  --line-strong: rgba(21, 32, 43, 0.18);
+  --shadow: 0 18px 48px rgba(24, 40, 58, 0.06);
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--paper);
+}
+
+body {
+  color: var(--ink);
+  font-family: "Public Sans", "Avenir Next", "Segoe UI", sans-serif;
+}
+
+.reveal-viewport {
+  background: var(--paper) !important;
+}
+
+.reveal {
+  color: var(--ink);
+  font-family: "Public Sans", "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 35px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.reveal .slides section {
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.reveal .slide-number {
+  font-family: "IBM Plex Mono", monospace;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-size: 0.34em;
+}
+
+.reveal .controls,
+.reveal .progress {
+  color: var(--gold);
+}
+
+.deck-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.deck-link:hover .deck-card {
+  border-color: rgba(194, 140, 45, 0.4);
+  box-shadow: 0 24px 56px rgba(24, 40, 58, 0.1);
+  transform: translateY(-3px);
+}
+
+.modular-index {
+  padding: 56px 28px 72px;
+  color: var(--ink);
+}
+
+.index-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.index-kicker {
+  margin: 0 0 10px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 14px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.index-title {
+  margin: 0;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(2.2rem, 4vw, 4.3rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+
+.index-copy {
+  max-width: 760px;
+  margin: 18px 0 34px;
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 24px;
+}
+
+.deck-card {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  min-height: 270px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.deck-preview {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  min-height: 180px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.95)),
+    radial-gradient(circle at top left, rgba(194, 140, 45, 0.12), transparent 48%);
+  border: 1px solid rgba(21, 32, 43, 0.08);
+  border-radius: 18px;
+}
+
+.deck-preview iframe {
+  width: 1400px;
+  height: 875px;
+  border: 0;
+  transform: scale(0.19);
+  transform-origin: top left;
+  pointer-events: none;
+}
+
+.deck-meta {
+  display: grid;
+  gap: 6px;
+}
+
+.deck-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.deck-card-title {
+  font-family: "Public Sans", sans-serif;
+  font-size: 1.26rem;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.title-slide {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 2.6em 2.9em !important;
+  text-align: center !important;
+}
+
+.paper-title-shell {
+  width: min(100%, 92vw);
+  margin: 0 auto;
+  display: grid;
+  gap: 0.98em;
+}
+
+.paper-title-shell h1 {
+  margin: 0;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(1.85rem, 3.8vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.028em;
+  color: #101418;
+  text-transform: none !important;
+  white-space: nowrap;
+}
+
+.paper-authors {
+  margin: 0;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(1.35rem, 2.55vw, 2.05rem);
+  font-weight: 400;
+  line-height: 1.24;
+  letter-spacing: -0.015em;
+  color: #101418;
+  white-space: nowrap;
+}
+
+.paper-authors sup,
+.paper-affiliations sup {
+  font-size: 0.58em;
+  vertical-align: 0.75em;
+}
+
+.paper-affiliations {
+  display: grid;
+  gap: 0.28em;
+}
+
+.paper-affiliations p {
+  margin: 0;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(1.1rem, 1.82vw, 1.58rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.18;
+  color: #1c2228;
+  white-space: nowrap;
+}
+
+.snapshot .reveal .slide-number,
+.snapshot .reveal .controls,
+.snapshot .reveal .progress {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .modular-index {
+    padding: 36px 18px 52px;
+  }
+
+  .deck-preview {
+    min-height: 154px;
+  }
+
+  .title-slide {
+    padding: 2em 1.4em !important;
+  }
+
+  .paper-title-shell {
+    width: min(100%, 20em);
+    gap: 0.9em;
+  }
+
+  .paper-title-shell h1 {
+    font-size: 1.22em;
+    white-space: normal;
+  }
+
+  .paper-authors {
+    font-size: 0.72em;
+    line-height: 1.35;
+    white-space: normal;
+  }
+
+  .paper-affiliations p {
+    font-size: 0.58em;
+    white-space: normal;
+  }
+}
