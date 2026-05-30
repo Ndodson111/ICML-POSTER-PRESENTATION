@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ICML Presentation · Slide 8 · memorization: interaction of two players</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="shared/deck.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script defer src="shared/deck.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      if (typeof renderMathInElement === "function") {
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false }
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  </script>
+  <style>
+    .bluebox, .greenbox, .goldbox, .redbox {
+      border-radius: 8px;
+      padding: 0.65em 0.85em 0.55em;
+      margin: 0.4em 0;
+      border: none;
+      border-left: 3px solid #2f5d9c;
+      box-shadow: none;
+    }
+    .bluebox  { background: #eaf2f8; border-left-color: #2f5d9c; }
+    .greenbox { background: #edf5ea; border-left-color: #2f7a4d; }
+    .goldbox  { background: #f6f1e3; border-left-color: #c28c2d; }
+    .redbox   { background: #f7ebea; border-left-color: #a43d2d; }
+
+    .bluebox .title,
+    .greenbox .title,
+    .goldbox .title,
+    .redbox .title {
+      display: block;
+      margin-bottom: 0.22em;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.34em;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .bluebox .title  { color: #1f3246; }
+    .greenbox .title { color: #56746a; }
+    .goldbox .title  { color: #c28c2d; }
+    .redbox .title   { color: #8a4f4b; }
+
+    .interaction-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.14fr) minmax(0, 0.86fr);
+      gap: 0.86em;
+      align-items: start;
+    }
+
+    .interaction-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 0.22em;
+    }
+
+    .interaction-figure {
+      margin: 0;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .interaction-figure img {
+      width: 100%;
+      max-height: min(44vh, 27rem);
+      object-fit: contain;
+      display: block;
+      border-radius: 16px;
+      border: 1px solid rgba(21, 32, 43, 0.10);
+      background: #ffffff;
+      padding: 0.26em;
+    }
+
+    .interaction-figure figcaption {
+      margin-top: 0.16em;
+      font-size: 0.34em;
+      line-height: 1.22;
+      color: #7f8da2;
+      text-align: left;
+    }
+
+    .interaction-copy .bluebox,
+    .interaction-copy .greenbox,
+    .interaction-copy .goldbox {
+      margin: 0 0 0.48em 0;
+      font-size: 0.64em;
+      line-height: 1.2;
+    }
+
+    .interaction-copy .katex-display {
+      margin: 0.1em 0 0.05em;
+      font-size: 0.78em;
+    }
+
+    @media (max-width: 1280px), (max-aspect-ratio: 16/10) {
+      .interaction-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .interaction-figure img {
+        max-height: min(38vh, 23rem);
+      }
+    }
+  </style>
+</head>
+<body class="modular-slide has-custom-nav" data-prev="07-shells-separate-at-small-sigma.html" data-home="index.html">
+  <header class="modular-nav">
+    <div class="modular-nav__group">
+      <a href="07-shells-separate-at-small-sigma.html">Prev</a>
+      <a href="index.html">Deck</a>
+      <div class="modular-nav__meta">Slide 8 / 8</div>
+      <a class="is-disabled" href="index.html" aria-disabled="true">Next</a>
+    </div>
+  </header>
+  <div class="reveal standalone-reveal">
+    <div class="slides">
+      <section class="interaction-slide">
+        <h2 data-kicker="Posterior max weight and Gaussian shell coverage">memorization: interaction of two players</h2>
+
+        <div class="interaction-layout">
+          <div class="interaction-visual">
+            <figure class="interaction-figure">
+              <img src="assets/slide-08-figure3-banded.png"
+                   alt="Coverage-versus-max-weight figure with slide-only color bands marking the small, intermediate, and large sigma regimes.">
+              <figcaption>Figure 3 geometry with slide-only color bands marking the three regimes directly inside the plot.</figcaption>
+            </figure>
+          </div>
+
+          <div class="interaction-copy">
+            <div class="bluebox fragment fade-up">
+              <span class="title">Player 1: posterior concentration</span>
+              $$w_i(y,\sigma)=\frac{\exp\!\left(-\|y-x_i\|^2/(2\sigma^2)\right)}{\sum_{j=1}^N \exp\!\left(-\|y-x_j\|^2/(2\sigma^2)\right)}$$
+              $$W_\sigma(\mathcal D):=\mathbb E\!\left[\max_i w_i(X+\sigma Z,\sigma)\right]$$
+              High $W_\sigma$ means the empirical-optimal denoiser is already dominated by one training image.
+            </div>
+
+            <div class="greenbox fragment fade-up">
+              <span class="title">Player 2: shell coverage</span>
+              $$\mathcal U_\sigma:=\bigcup_{i=1}^N \mathrm{Sh}_\sigma(x_i)$$
+              $$C_\sigma(p,\mathcal D):=\mathbb P(X+\sigma Z\in \mathcal U_\sigma)$$
+              High $C_\sigma$ means noisy test samples actually land in regions that training has supervised.
+            </div>
+
+            <div class="goldbox fragment fade-up">
+              <span class="title">Pedagogical summary</span>
+              Memorization needs both players. Small noise lacks coverage; large noise lacks concentration; the danger zone is the intermediate overlap.
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
