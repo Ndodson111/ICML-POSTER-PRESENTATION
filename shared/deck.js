@@ -54,7 +54,7 @@
 
       if (isEditable) return;
 
-      if ((event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") && next) {
+      if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
         const fragments = revealDeck?.availableFragments?.();
         if (fragments?.next) {
           event.preventDefault();
@@ -62,12 +62,14 @@
           return;
         }
 
-        event.preventDefault();
-        navigate(next);
-        return;
+        if (next) {
+          event.preventDefault();
+          navigate(next);
+          return;
+        }
       }
 
-      if ((event.key === "ArrowLeft" || event.key === "PageUp" || event.key === "Backspace") && prev) {
+      if (event.key === "ArrowLeft" || event.key === "PageUp" || event.key === "Backspace") {
         const fragments = revealDeck?.availableFragments?.();
         if (fragments?.prev) {
           event.preventDefault();
@@ -75,9 +77,11 @@
           return;
         }
 
-        event.preventDefault();
-        navigate(prev);
-        return;
+        if (prev) {
+          event.preventDefault();
+          navigate(prev);
+          return;
+        }
       }
 
       if ((event.key === "Home" || event.key === "Escape") && home) {
