@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ICML Presentation · Slide 4 · Returning to the loss function</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
+  <link rel="stylesheet" href="shared/deck.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script defer src="shared/deck.js"></script>
+  <style>
+    .loss-shell {
+      width: 100%;
+      max-width: 100%;
+      margin: 0.28em auto 0;
+      display: grid;
+      gap: 0.22em;
+    }
+
+    .loss-shell p {
+      margin: 0;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 0.8em;
+      line-height: 1.22;
+      letter-spacing: -0.01em;
+      color: #18293a;
+    }
+
+    .loss-intro {
+      width: 100%;
+      text-align: left;
+    }
+
+    .loss-caption {
+      margin-top: 0.16em !important;
+      width: 100%;
+      text-align: left;
+    }
+
+    .loss-equation {
+      margin-top: 0.04em;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      width: 100%;
+      gap: 0.34em;
+      color: #101b28;
+      font-family: "Newsreader", Georgia, serif;
+      letter-spacing: -0.015em;
+      white-space: nowrap;
+    }
+
+    .loss-equation sup,
+    .loss-equation sub {
+      font-size: 0.62em;
+      line-height: 0;
+    }
+
+    .eq-main,
+    .eq-norm {
+      font-size: 1.06em;
+      line-height: 1.02;
+    }
+
+    .eq-main {
+      padding-top: 0.05em;
+    }
+
+    .eq-expectation {
+      display: grid;
+      justify-items: center;
+      gap: 0.02em;
+      margin-top: 0.02em;
+    }
+
+    .eq-symbol {
+      font-size: 1.04em;
+      line-height: 1;
+    }
+
+    .eq-substack {
+      display: grid;
+      gap: 0.02em;
+      font-size: 0.5em;
+      line-height: 0.98;
+      text-align: center;
+    }
+
+    .eq-norm {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.05em;
+    }
+
+    .eq-bars {
+      font-size: 1.12em;
+      line-height: 0.9;
+    }
+
+    .players-label {
+      width: 100%;
+      margin-top: 0.24em !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      text-align: left;
+      font-family: "Public Sans", "Avenir Next", "Segoe UI", sans-serif;
+      font-size: 0.72em !important;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #1f3246;
+    }
+
+    .players-shell {
+      width: min(100%, 46rem);
+      margin: 0 auto;
+      display: grid;
+      gap: 0.28em;
+    }
+
+    .player-card {
+      width: 100%;
+      padding: 0.48em 0.72em;
+      border-radius: 14px;
+      box-sizing: border-box;
+      font-family: "Public Sans", "Avenir Next", "Segoe UI", sans-serif;
+      font-size: 0.86em;
+      line-height: 1.22;
+      color: #23384e;
+      box-shadow: 0 10px 24px rgba(24, 40, 58, 0.04);
+    }
+
+    .player-card p {
+      margin: 0;
+      font: inherit;
+      color: inherit;
+      letter-spacing: 0;
+    }
+
+    .player-card.blue {
+      background: #eaf2f8;
+      border-left: 4px solid #2f5d9c;
+    }
+
+    .player-card.gold {
+      background: #f6f1e3;
+      border-left: 4px solid #c28c2d;
+    }
+
+    .math-bb {
+      font-family: "STIX Two Math", "Cambria Math", "Times New Roman", serif;
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .math-italic {
+      font-style: italic;
+    }
+
+    .math-bold {
+      font-style: italic;
+      font-weight: 700;
+      color: #101b28;
+    }
+
+    .math-script {
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .loss-callout sup,
+    .loss-callout sub {
+      font-size: 0.7em;
+      line-height: 0;
+    }
+
+    @media (max-width: 900px) {
+      .loss-shell {
+        max-width: 100%;
+      }
+
+      .loss-shell p {
+        font-size: 0.58em;
+      }
+
+      .loss-equation {
+        font-size: 0.72em;
+        white-space: normal;
+        flex-wrap: wrap;
+      }
+
+      .players-label,
+      .players-shell {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body class="modular-slide has-custom-nav" data-prev="03-denoising-quality-across-noise-levels.html" data-home="index.html">
+  <header class="modular-nav">
+    <div class="modular-nav__group">
+      <a href="03-denoising-quality-across-noise-levels.html">Prev</a>
+      <a href="index.html">Deck</a>
+      <div class="modular-nav__meta">Slide 4 / 4</div>
+      <a class="is-disabled" href="index.html" aria-disabled="true">Next</a>
+    </div>
+  </header>
+
+  <div class="reveal standalone-reveal">
+    <div class="slides">
+      <section>
+        <h2 data-kicker="Empirical optimal and sampling">Returning to the loss function</h2>
+
+        <div class="loss-shell">
+          <p class="loss-intro">
+            Let <span class="math-italic">p</span> denote a data distribution on
+            <span class="math-script">ℝ</span><sup>d</sup>. Let <span class="math-bold">X</span> ∼
+            <span class="math-italic">p</span> denote a random variable following
+            <span class="math-italic">p</span> and <span class="math-bold">Z</span> ∼
+            <span class="math-script">𝒩</span>(0, <span class="math-italic">I</span><sub>d</sub>) a standard Gaussian
+            random variable independent of <span class="math-bold">X</span>. A central task of diffusion models is to denoise
+            <span class="math-bold">X</span><sub>σ</sub> = <span class="math-bold">X</span> + <span class="math-italic">σ</span><span class="math-bold">Z</span>
+            at various levels of <span class="math-italic">σ</span>.
+          </p>
+
+          <p class="loss-caption">A common loss function is given by:</p>
+
+          <div class="loss-equation" aria-label="Loss function equation">
+            <div class="eq-main">ℒ(<span class="math-italic">θ</span>) :=</div>
+
+            <div class="eq-expectation">
+              <div class="eq-symbol"><span class="math-bb">𝔼</span></div>
+              <div class="eq-substack">
+                <div><span class="math-bold">X</span>∼<span class="math-italic">p</span></div>
+                <div><span class="math-bold">Z</span>∼<span class="math-script">𝒩</span>(0,<span class="math-italic">I</span><sub>d</sub>)</div>
+                <div><span class="math-italic">σ</span>∼<span class="math-italic">λ</span></div>
+              </div>
+            </div>
+
+            <div class="eq-norm">
+              <span class="eq-bars">∥</span>
+              <span><span class="math-italic">m</span><sup>θ</sup><sub>σ</sub>(<span class="math-bold">X</span><sub>σ</sub>) − <span class="math-bold">X</span></span>
+              <span class="eq-bars">∥</span><sup>2</sup>
+            </div>
+          </div>
+
+          <p class="players-label">Two key players:</p>
+
+          <div class="players-shell">
+            <div class="player-card blue fragment fade-in" data-fragment-index="0">
+              <p>The empirical optimal denoiser <span class="math-italic">m</span><sub>σ</sub>, which the model attempts to fit</p>
+            </div>
+
+            <div class="player-card gold fragment fade-in" data-fragment-index="1">
+              <p>The drawn samples <span class="math-bold">X</span> + <span class="math-italic">σ</span><span class="math-bold">Z</span> that the model sees during training</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
