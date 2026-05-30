@@ -211,6 +211,13 @@ body.has-custom-nav .reveal .slide-number {
   pointer-events: none;
 }
 
+.deck-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .deck-meta {
   display: grid;
   gap: 6px;
