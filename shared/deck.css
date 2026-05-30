@@ -251,7 +251,7 @@ body.has-custom-nav .reveal .slide-number {
 }
 
 .paper-title-shell {
-  width: min(100%, 92vw);
+  width: min(100%, 96vw);
   margin: 0 auto;
   display: grid;
   gap: 0.98em;
@@ -260,7 +260,7 @@ body.has-custom-nav .reveal .slide-number {
 .paper-title-shell h1 {
   margin: 0;
   font-family: "Newsreader", Georgia, serif;
-  font-size: clamp(1.85rem, 3.8vw, 3.4rem);
+  font-size: clamp(1.8rem, 3.45vw, 3.08rem);
   font-weight: 500;
   line-height: 1.12;
   letter-spacing: -0.028em;
