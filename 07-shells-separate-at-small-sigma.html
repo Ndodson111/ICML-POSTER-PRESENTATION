@@ -73,6 +73,7 @@
     }
 
     .shell-control-frame {
+      position: relative;
       width: min(92vw, 1200px);
       height: min(59vh, 540px);
       border-radius: 34px;
@@ -90,6 +91,77 @@
       width: 100%;
       height: 100%;
       display: block;
+    }
+
+    .shell-legend {
+      position: absolute;
+      right: 1.05rem;
+      bottom: 1rem;
+      padding: 0.84rem 1.12rem 0.76rem;
+      border-radius: 14px;
+      background: rgba(255, 252, 246, 0.92);
+      box-shadow:
+        inset 0 0 0 1px rgba(34, 50, 76, 0.08),
+        0 10px 24px rgba(28, 44, 71, 0.08);
+      backdrop-filter: blur(8px);
+    }
+
+    .shell-legend table {
+      border-collapse: collapse;
+      font-family: "Public Sans", "Avenir Next", "Segoe UI", sans-serif;
+      font-size: 0.68em;
+      line-height: 1.18;
+      color: #405162;
+    }
+
+    .shell-legend td {
+      padding: 0.16rem 0;
+      vertical-align: middle;
+    }
+
+    .shell-legend td:nth-child(2) {
+      padding: 0 0.64rem 0 0.52rem;
+      font-family: "IBM Plex Mono", monospace;
+      color: #718299;
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 1.12rem;
+      height: 1.12rem;
+      border-radius: 50%;
+      background: #284667;
+      box-shadow: 0 0 0 1px rgba(40, 70, 103, 0.12);
+    }
+
+    .legend-cross {
+      position: relative;
+      display: inline-block;
+      width: 1.52rem;
+      height: 1.52rem;
+    }
+
+    .legend-cross::before,
+    .legend-cross::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 1.52rem;
+      height: 0.28rem;
+      border-radius: 999px;
+      background: #9a7031;
+      transform-origin: center;
+      margin-left: -0.76rem;
+      margin-top: -0.14rem;
+    }
+
+    .legend-cross::before {
+      transform: rotate(45deg);
+    }
+
+    .legend-cross::after {
+      transform: rotate(-45deg);
     }
 
     .shell-control-slider-wrap {
@@ -115,6 +187,10 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: #5f7494;
+    }
+
+    .shell-formula-box .title .keep-lower {
+      text-transform: none;
     }
 
     .shell-formula-box .katex-display {
@@ -255,6 +331,22 @@
                 <line x1="739" y1="305" x2="721" y2="323"></line>
               </g>
             </svg>
+            <div class="shell-legend" aria-label="Figure legend">
+              <table>
+                <tbody>
+                  <tr>
+                    <td><span class="legend-dot" aria-hidden="true"></span></td>
+                    <td>=</td>
+                    <td>training points</td>
+                  </tr>
+                  <tr>
+                    <td><span class="legend-cross" aria-hidden="true"></span></td>
+                    <td>=</td>
+                    <td>test points</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <label class="sr-only" for="sigma-shell-slider">Sigma shell size</label>
@@ -263,7 +355,7 @@
           </div>
 
           <div class="bluebox shell-formula-box">
-            <span class="title">Fixed-$\sigma$ supervision heuristic</span>
+            <span class="title">Fixed-<span class="keep-lower">σ</span> supervision heuristic</span>
             $$Y=X+\sigma Z,\qquad \mathcal U_\sigma:=\bigcup_{i=1}^N \mathrm{Sh}_\sigma(x_i),\qquad C_\sigma(p,\mathcal D):=\mathbb P(Y\in \mathcal U_\sigma).$$
             $$\mathcal L_\sigma(\theta)=\mathbb E\|m^\theta_\sigma(Y)-X\|^2 \approx \mathbb E\!\left[\|m^\theta_\sigma(Y)-X\|^2\,\mathbf 1_{\{Y\in \mathcal U_\sigma\}}\right].$$
             At small $\sigma$, the supervised region is only a thin disconnected union of shells around the training atoms.
