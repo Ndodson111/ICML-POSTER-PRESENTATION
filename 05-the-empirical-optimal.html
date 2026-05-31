@@ -125,19 +125,31 @@
     }
 
     .slide5-takeaway {
-      width: min(100%, 48rem);
+      width: min(100%, 54rem);
       margin: 0.72em auto 0;
+      display: grid;
+      gap: 0.25in;
+      justify-items: center;
       text-align: center;
       font-family: "Newsreader", Georgia, serif;
       font-size: 0.72em;
       line-height: 1.24;
       color: #31465e;
-      white-space: nowrap;
     }
 
     .slide5-takeaway p {
       margin: 0;
       color: inherit;
+    }
+
+    .slide5-takeaway__primary {
+      white-space: nowrap;
+    }
+
+    .slide5-takeaway__secondary {
+      max-width: 52rem;
+      font-size: 1em;
+      line-height: 1.18;
     }
 
     @media (max-width: 900px) {
@@ -188,8 +200,9 @@
           </figure>
         </div>
 
-        <div class="slide5-takeaway fragment fade-in" data-fragment-index="0">
-          <p>Noise level decreases → one weight becomes concentrated → nearest neighbor behavior</p>
+        <div class="slide5-takeaway">
+          <p class="slide5-takeaway__primary fragment fade-in" data-fragment-index="0">Noise level decreases → one weight becomes concentrated → nearest neighbor behavior</p>
+          <p class="slide5-takeaway__secondary fragment fade-in" data-fragment-index="1">We use the expected max weight as an estimate for when nearest neighbor behavior arises in the empirical optimal solution.</p>
         </div>
       </section>
     </div>
