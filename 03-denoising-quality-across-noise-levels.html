@@ -16,7 +16,7 @@
   <style>
     .quality-shell {
       width: 100%;
-      max-width: 45rem;
+      max-width: 48rem;
       margin: 0.35em auto 0;
       display: grid;
       gap: 0.5em;
@@ -37,28 +37,21 @@
       object-fit: contain;
     }
 
-    .takeaway-grid {
-      width: min(100%, 39rem);
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
-      gap: 0.5em;
-      align-items: stretch;
-    }
-
     .takeaway-stack {
+      width: min(100%, 46rem);
       display: grid;
-      gap: 0.5em;
+      gap: 0.28em;
     }
 
     .insight-card {
       width: 100%;
-      padding: 0.55em 0.72em;
-      border-radius: 12px;
-      border-left: 3px solid transparent;
+      padding: 0.48em 0.72em;
+      border-radius: 14px;
+      border-left: 4px solid transparent;
       box-sizing: border-box;
-      font-size: 0.62em;
-      line-height: 1.3;
-      color: #31465e;
+      font-size: 0.7em;
+      line-height: 1.22;
+      color: #23384e;
       box-shadow: 0 10px 24px rgba(24, 40, 58, 0.04);
     }
 
@@ -80,8 +73,6 @@
     .insight-card.gold {
       background: #f6f1e3;
       border-left-color: #c28c2d;
-      display: flex;
-      align-items: center;
     }
 
     @media (max-width: 900px) {
@@ -92,10 +83,6 @@
 
       .quality-figure {
         max-width: 100%;
-      }
-
-      .takeaway-grid {
-        grid-template-columns: 1fr;
       }
 
       .insight-card {
@@ -117,7 +104,7 @@
   <div class="reveal standalone-reveal">
     <div class="slides">
       <section>
-        <h2 data-kicker="Memorizing models differ on test data">Denoising quality across noise levels</h2>
+        <h2 data-kicker="Memorizing Models differ from optimal solution at low noise">Denoising quality across noise levels</h2>
 
         <div class="quality-shell">
           <figure class="quality-figure">
@@ -127,15 +114,13 @@
             >
           </figure>
 
-          <div class="takeaway-grid">
-            <div class="takeaway-stack">
-              <div class="insight-card blue fragment fade-in" data-fragment-index="0">
-                <p>At large noise levels, generalizing and memorizing denoisers behave the same.</p>
-              </div>
+          <div class="takeaway-stack">
+            <div class="insight-card blue fragment fade-in" data-fragment-index="0">
+              <p>At large noise levels, generalizing and memorizing denoisers behave the same.</p>
+            </div>
 
-              <div class="insight-card red fragment fade-in" data-fragment-index="1">
-                <p>At moderate noise levels, a memorizing model performs differently on training data and test data.</p>
-              </div>
+            <div class="insight-card red fragment fade-in" data-fragment-index="1">
+              <p>At moderate noise levels, a memorizing model performs differently on training data and test data.</p>
             </div>
 
             <div class="insight-card gold fragment fade-in" data-fragment-index="2">
