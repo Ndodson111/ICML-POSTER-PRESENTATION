@@ -32,7 +32,6 @@
   <style>
     .bluebox,
     .greenbox,
-    .goldbox,
     .redbox {
       border-radius: 8px;
       padding: 0.65em 0.85em 0.55em;
@@ -52,11 +51,6 @@
       border-left-color: #2f7a4d;
     }
 
-    .goldbox {
-      background: #f6f1e3;
-      border-left-color: #c28c2d;
-    }
-
     .redbox {
       background: #f7ebea;
       border-left-color: #a43d2d;
@@ -71,8 +65,7 @@
     }
 
     .slide5-copy .bluebox,
-    .slide5-copy .greenbox,
-    .slide5-copy .goldbox {
+    .slide5-copy .greenbox {
       margin: 0 0 0.45em 0;
       font-size: 0.72em;
       line-height: 1.24;
@@ -84,6 +77,16 @@
       font-size: 0.84em;
     }
 
+    .slide5-copy .greenbox {
+      padding-top: 0.72em;
+      padding-bottom: 0.72em;
+      line-height: 1.3;
+    }
+
+    .slide5-copy .greenbox .katex-display {
+      margin: 0.22em 0 0.2em;
+    }
+
     .card-title {
       display: block;
       margin-bottom: 0.22em;
@@ -93,12 +96,6 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: #5f7494;
-    }
-
-    .figure-stack {
-      display: grid;
-      gap: 0.3em;
-      align-items: start;
     }
 
     .stack-figure {
@@ -124,11 +121,23 @@
     }
 
     .stack-figure.top img {
-      max-height: min(28vh, 15rem);
+      max-height: min(40vh, 21rem);
     }
 
-    .stack-figure.bottom img {
-      max-height: min(22vh, 12rem);
+    .slide5-takeaway {
+      width: min(100%, 48rem);
+      margin: 0.72em auto 0;
+      text-align: center;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 0.72em;
+      line-height: 1.24;
+      color: #31465e;
+      white-space: nowrap;
+    }
+
+    .slide5-takeaway p {
+      margin: 0;
+      color: inherit;
     }
 
     @media (max-width: 900px) {
@@ -151,46 +160,36 @@
   <div class="reveal standalone-reveal">
     <div class="slides">
       <section>
-        <h2 data-kicker="Player One.">The empirical optimal</h2>
+        <h2 data-kicker="Player One">The Empirical Optimal \(m_\sigma\)</h2>
 
         <div class="slide5-layout">
           <div class="slide5-copy">
             <div class="bluebox">
               <span class="card-title">Finite-data training loss</span>
               $$\min_\theta\;\mathbb{E}_{\sigma,X,Z}\,\bigl\|m_\sigma^\theta(X+\sigma Z)-X\bigr\|^2$$
-              On a finite dataset, the natural benchmark is the empirical-optimal denoiser.
+              On a finite dataset, the natural benchmark is the empirical-optimal denoiser \(m_\sigma\).
             </div>
 
             <div class="greenbox">
               <span class="card-title">Empirical optimum = weighted average</span>
               $$m_\sigma(x)=\sum_{i=1}^N w_i(x,\sigma)\,x_i$$
               $$w_i(x,\sigma)=\frac{\exp\!\left(-\|x-x_i\|^2/(2\sigma^2)\right)}{\sum_{j=1}^N \exp\!\left(-\|x-x_j\|^2/(2\sigma^2)\right)}$$
-              The top-right curve tracks \(W_\sigma(x)=\max_i w_i(x,\sigma)\).
+              The curve tracks \(W_\sigma(x)=\max_i w_i(x,\sigma)\).
             </div>
 
-            <div class="goldbox">
-              <span class="card-title">What is missing?</span>
-              Apparently, the memorizing model is not similar to the empirical optimal at small \( \sigma \)
-            </div>
           </div>
 
-          <div class="figure-stack">
-            <figure class="stack-figure top">
-              <span class="figure-label">Empirical optimum: max posterior weight</span>
-              <img
-                src="assets/slide-05-max-weight-only.png"
-                alt="Max posterior weight versus sigma on CIFAR-10 1K."
-              >
-            </figure>
+          <figure class="stack-figure top">
+            <span class="figure-label">Empirical optimum: max posterior weight</span>
+            <img
+              src="assets/slide-05-max-weight-only.png"
+              alt="Max posterior weight versus sigma on CIFAR-10 1K."
+            >
+          </figure>
+        </div>
 
-            <figure class="stack-figure bottom">
-              <span class="figure-label">EDM-1K: one-step memorization rate</span>
-              <img
-                src="assets/slide-03-per-noise-memorization.png"
-                alt="Per-noise memorization rate on CIFAR-10 for EMP-1K, EDM-1K, and EDM-50K."
-              >
-            </figure>
-          </div>
+        <div class="slide5-takeaway fragment fade-in" data-fragment-index="0">
+          <p>Noise level decreases → one weight becomes concentrated → nearest neighbor behavior</p>
         </div>
       </section>
     </div>
