@@ -56,57 +56,17 @@
     }
 
     .qa-block {
-      display: grid;
-      gap: 0.14em;
-      width: max-content;
-      max-width: 100%;
+      width: min(100%, 56rem);
       margin: 0.9em auto 0;
     }
 
-    .qa-row {
-      display: grid;
-      grid-template-columns: 8.2ch max-content;
-      column-gap: 0.14em;
-      align-items: baseline;
-      width: max-content;
-      max-width: 100%;
-      text-align: left;
-    }
-
-    .question-callout {
+    .statement-callout {
       margin: 0;
-      width: max-content;
-      max-width: 100%;
       font-family: "Newsreader", Georgia, serif;
-      font-size: 0.9em;
+      font-size: 0.86em;
       line-height: 1.24;
       color: #31465e;
-      white-space: nowrap;
-    }
-
-    .answer-callout {
-      margin: 0;
-      width: max-content;
-      max-width: 100%;
-      font-family: "Newsreader", Georgia, serif;
-      font-size: 0.9em;
-      line-height: 1.24;
-      color: #31465e;
-      white-space: nowrap;
-    }
-
-    .qa-label {
-      text-align: right;
-    }
-
-    .question-callout strong {
-      color: #1f3246;
-      font-weight: 600;
-    }
-
-    .answer-callout strong {
-      color: #1f3246;
-      font-weight: 600;
+      text-align: center;
     }
 
     @media (max-width: 900px) {
@@ -121,30 +81,8 @@
         height: auto;
       }
 
-      .question-callout {
+      .statement-callout {
         font-size: 0.64em;
-        width: auto;
-        white-space: normal;
-      }
-
-      .answer-callout {
-        font-size: 0.64em;
-        width: auto;
-        white-space: normal;
-      }
-
-      .qa-block,
-      .qa-row {
-        width: auto;
-      }
-
-      .qa-row {
-        grid-template-columns: auto;
-        text-align: center;
-      }
-
-      .qa-label {
-        text-align: center;
       }
     }
   </style>
@@ -162,7 +100,7 @@
   <div class="reveal standalone-reveal">
     <div class="slides">
       <section>
-        <h2 data-kicker="EDM (Karras et al., 2022) retrained on 1K CIFAR-10">Diffusion models can memorize data</h2>
+        <h2 data-kicker="EDM (Karras et al., 2022) trained on 1K CIFAR-10">Diffusion models can memorize data</h2>
 
         <div class="setup-row">
           <div class="setup-pill">Model: standard EDM sampler / denoiser from Karras et al., NeurIPS 2022</div>
@@ -176,15 +114,8 @@
           >
         </figure>
 
-        <div class="qa-block">
-          <p class="question-callout qa-row fragment" data-fragment-index="1">
-            <span class="qa-label"><strong>Question:</strong></span>
-            <span>Is memorization risk uniform across the noise schedule?</span>
-          </p>
-          <p class="answer-callout qa-row fragment" data-fragment-index="2">
-            <span class="qa-label"><strong>Answer:</strong></span>
-            <span>No</span>
-          </p>
+        <div class="qa-block fragment">
+          <p class="statement-callout">Memorization is not surprising as there exists a unique empirical optimal solution which memorizes.</p>
         </div>
       </section>
     </div>
