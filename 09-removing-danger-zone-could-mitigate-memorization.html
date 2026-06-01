@@ -36,31 +36,14 @@
       margin: 0 auto;
     }
 
-    .late-backlink {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5em;
+    .late-overline {
+      display: inline-block;
       margin: 0.06em 0 0.58em;
       font-family: "IBM Plex Mono", monospace;
       font-size: 0.38em;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      text-decoration: none;
       color: var(--ink-muted);
-    }
-
-    .late-backlink::before {
-      content: "←";
-      color: var(--gold);
-      font-size: 1.08em;
-      line-height: 1;
-      letter-spacing: 0;
-    }
-
-    .late-backlink:hover,
-    .late-backlink:focus-visible {
-      color: var(--navy);
-      outline: none;
     }
 
     .late-lead {
@@ -69,6 +52,13 @@
       font-size: 0.58em;
       line-height: 1.34;
       color: var(--ink-soft);
+    }
+
+    .late-lead--centered {
+      max-width: 56em;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
     }
 
     .late-grid {
@@ -179,13 +169,24 @@
       max-height: min(37vh, 21.5rem);
     }
 
+    .validation-figure-panel {
+      width: min(100%, 62rem);
+      margin: 0.4rem auto 0;
+      padding: 0.72rem 0.84rem 0.9rem;
+    }
+
+    .validation-figure-panel .late-panel__kicker {
+      text-align: center;
+      margin-bottom: 0.62rem;
+    }
+
     .danger-wrap {
-      margin-top: 0.16rem;
+      margin-top: 0;
     }
 
     .danger-frame {
       position: relative;
-      width: min(100%, 27rem);
+      width: min(100%, 56rem);
       margin: 0 auto;
     }
 
@@ -193,7 +194,7 @@
       display: block;
       width: 100%;
       height: auto;
-      max-height: min(22vh, 11rem);
+      max-height: min(48vh, 30rem);
       object-fit: contain;
     }
 
@@ -231,20 +232,12 @@
         grid-template-columns: 1fr;
       }
 
-      .danger-zone-slide .late-grid {
-        grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
-      }
-
-      .late-figure--gap img {
-        max-height: min(32vh, 18rem);
-      }
-
       .danger-frame {
-        width: min(100%, 24rem);
+        width: min(100%, 48rem);
       }
 
       .danger-frame img {
-        max-height: min(18vh, 9.2rem);
+        max-height: min(38vh, 23rem);
       }
     }
 
@@ -268,7 +261,7 @@
     }
 
     @media (max-height: 700px) {
-      .danger-zone-slide .late-backlink {
+      .danger-zone-slide .late-overline {
         margin-bottom: 0.3em;
       }
 
@@ -291,16 +284,8 @@
         margin-bottom: 0.24rem;
       }
 
-      .danger-zone-slide .late-stack {
-        gap: 0.4rem;
-      }
-
-      .danger-zone-slide .late-figure--gap img {
-        max-height: min(27vh, 15rem);
-      }
-
       .danger-zone-slide .danger-frame img {
-        max-height: min(13vh, 7.2rem);
+        max-height: min(28vh, 17rem);
       }
     }
   </style>
@@ -318,55 +303,20 @@
     <div class="slides">
       <section class="danger-zone-slide">
         <div class="late-shell">
-          <a class="late-backlink" href="08-the-danger-zone-visualized.html">Back to previous slide</a>
-          <h2 data-kicker="Empirical observation · Figure 4 + danger-zone intuition">Removing danger zone could mitigate memorization</h2>
-          <p class="late-lead">
+          <div class="late-overline">EXPERIMENTAL VALIDATION</div>
+          <h2 data-kicker="Empirical observation · Figure 8 intuition">Removing danger zone could mitigate memorization</h2>
+          <p class="late-lead late-lead--centered">
             On the 2k CIFAR-10 car subset, 2k-Gap simply skips the medium-noise band
             <span class="math inline">\(\sigma \in [1, 5]\)</span>. If that band is really where memorization is learned,
             memorization should fall without wrecking FID.
           </p>
-          <div class="late-grid">
-            <div class="late-panel late-panel--warm">
-              <div class="late-panel__kicker">Figure 4 · Training outcome</div>
-              <div class="late-chip-row">
-                <span class="late-chip">2k CIFAR-10 cars</span>
-                <span class="late-chip">skip \(\sigma \in [1, 5]\)</span>
-                <span class="late-chip">track FID + memorization</span>
-              </div>
-              <figure class="late-figure late-figure--gap">
-                <img src="assets/slide-09-gap-training.png" alt="Gap-training experiment showing FID and memorization trajectories for 2k-Gap, 2k-Baseline, and 2k-Dummy across training iterations.">
-              </figure>
-            </div>
-            <div class="late-stack">
-              <div class="late-panel late-panel--sage">
-                <div class="late-panel__kicker">Experiment in one glance</div>
-                <p>
-                  This asks whether the danger zone is causal, not just correlated with memorization.
-                </p>
-                <div class="late-kv">
-                  <div class="late-kv__row">
-                    <div class="late-kv__label">Setup</div>
-                    <span>EDM on 2k CIFAR-10 cars, trained for 40k iterations and read at 8 checkpoints.</span>
-                  </div>
-                  <div class="late-kv__row">
-                    <div class="late-kv__label">Compare</div>
-                    <span>2k-Baseline, 2k-Dummy, and our 2k-Gap schedule.</span>
-                  </div>
-                  <div class="late-kv__row">
-                    <div class="late-kv__label">Idea</div>
-                    <span>Skip the middle band and see whether memorization drops while FID stays good.</span>
-                  </div>
-                </div>
-              </div>
-              <div class="late-panel late-panel--paper">
-                <div class="late-panel__kicker">Figure 8 intuition · danger zone</div>
-                <div class="danger-wrap">
-                  <div class="danger-frame">
-                    <img src="assets/slide-09-danger-zone-combined.png" alt="Coverage and max-weight curves with gap configurations overlaid across the medium-noise regime.">
-                    <div class="danger-band" aria-hidden="true"></div>
-                    <div class="danger-band-label" aria-hidden="true">danger zone</div>
-                  </div>
-                </div>
+          <div class="late-panel validation-figure-panel">
+            <div class="late-panel__kicker">Figure 8 intuition · danger zone</div>
+            <div class="danger-wrap">
+              <div class="danger-frame">
+                <img src="assets/slide-09-danger-zone-combined.png" alt="Coverage and max-weight curves with gap configurations overlaid across the medium-noise regime.">
+                <div class="danger-band" aria-hidden="true"></div>
+                <div class="danger-band-label" aria-hidden="true">danger zone</div>
               </div>
             </div>
           </div>
